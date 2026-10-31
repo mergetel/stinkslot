@@ -55,6 +55,17 @@ window.SITE = 'mergetel.github.io/stinkslot';
           <p class="credits">The photos are real corpse flowers, none of them Barb, all CC0 from Wikimedia Commons: Kew by <a href="https://commons.wikimedia.org/wiki/File:Titan_arum_flowering,_Princess_of_Wales_Conservatory,_Kew.jpg">AndyScott</a> and <a href="https://commons.wikimedia.org/wiki/File:Titan_arum_at_Kew_Gardens_in_leaf_cycle.jpg">Mooyah</a>, Meise by <a href="https://commons.wikimedia.org/wiki/File:Amorphophallus_titanum_at_Meise_Botanic_Garden_in_2024.jpg">Orbicule</a>, Warsaw by <a href="https://commons.wikimedia.org/wiki/File:Measuring_temperature_of_a_blooming_Amorphophallus_titanum_3.jpg">Olaf</a>, Bayreuth by <a href="https://commons.wikimedia.org/wiki/File:Titan_Arum_at_Bayreuth_University_-_Second_Day_1.JPG">Fbianh</a>.</p>
           <p><a href="${BASE}pricing/">Pricing</a> · <a href="${BASE}status/">Status</a> · <a href="https://merge.tel">merge.tel</a></p>
         </div>
+        <!-- whois:start. The same block is on every mergetel satire site. See "The footer" in the README. -->
+        <section class="whois" aria-labelledby="whois-h">
+          <h2 id="whois-h">Who made this</h2>
+          <p>I'm John. I make software on my own, with more AI agents helping than is probably healthy. I did the enterprise job for twenty years and I'm unemployable now, so the real stuff below has to work.</p>
+          <ul>
+            <li><a href="https://johnf.build">johnf.build</a><span>what I'm building and how it's going</span></li>
+            <li><a href="https://merge.tel">merge.tel</a><span>turns merged pull requests into customer updates</span></li>
+            <li><a href="https://screenery.dev">Screenery</a><span>screenshots that update themselves on every release</span></li>
+          </ul>
+        </section>
+        <!-- whois:end -->
       </div>`;
   }
 
