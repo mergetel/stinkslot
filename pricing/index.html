@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing · StinkSlot</title>
+<meta name="description" content="StinkSlot pricing. Pay per bloom, or pay every year including the nine where nothing happens. A parody.">
+<meta property="og:title" content="Pricing · StinkSlot">
+<meta property="og:image" content="https://mergetel.github.io/stinkslot/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .top { padding: 64px 0 24px; text-align: center; }
+  .top .lede { margin-left: auto; margin-right: auto; }
+  .toggle { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); }
+  .toggle button { padding: 8px 18px; border: 0; border-radius: 999px; background: transparent; font: inherit; font-weight: 600; color: var(--muted); cursor: pointer; }
+  .toggle button[aria-pressed=true] { background: #fff; color: var(--text); box-shadow: 0 2px 8px rgba(60, 10, 30, .1); }
+  .save { display: block; margin-top: 10px; color: var(--muted); font-size: 14px; min-height: 22px; }
+
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; align-items: start; }
+  .tier { position: relative; display: flex; flex-direction: column; gap: 14px; }
+  .tier.pop { border: 2px solid var(--brand); box-shadow: 0 20px 50px rgba(122, 18, 54, .14); }
+  .tag { position: absolute; top: -13px; left: 24px; padding: 3px 10px; border-radius: 999px; background: var(--brand); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+  .tier h3 { font-size: 20px; margin: 0; }
+  .tier .for { margin: 0; color: var(--muted); }
+  .price { margin: 0; font-size: 44px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .price small { font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+  .note { margin: 0; color: var(--muted); font-size: 14px; min-height: 42px; }
+  .tier ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .tier li { padding-left: 26px; position: relative; }
+  .tier li::before { content: '✓'; position: absolute; left: 0; color: var(--stink); font-weight: 800; }
+
+  .math { max-width: 760px; margin: 48px auto 0; }
+  .math table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .math th, .math td { padding: 12px 10px; border-bottom: 1px solid var(--line); text-align: left; }
+  .math th { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+  .math td:last-child, .math th:last-child { text-align: right; }
+
+  .faq { max-width: 760px; margin: 28px auto 0; }
+  .faq details { border-bottom: 1px solid var(--line); padding: 16px 4px; }
+  .faq summary { cursor: pointer; font-weight: 700; font-size: 17px; }
+  .faq details p { margin: 10px 0 0; color: var(--muted); }
+
+  @media (max-width: 860px) { .tiers { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+
+<main>
+  <section class="top">
+    <div class="wrap">
+      <p class="kicker">Pricing</p>
+      <h1>Pay for the bloom, <span class="grad">not the wait.</span></h1>
+      <p class="lede">Or pay for the wait. A lot of people do, and we've stopped asking why.</p>
+      <div class="toggle" role="group" aria-label="Billing">
+        <button type="button" data-bill="bloom" aria-pressed="true">Per bloom</button>
+        <button type="button" data-bill="year" aria-pressed="false">Annual</button>
+      </div>
+      <span class="save" id="save" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tiers">
+      <div class="card tier">
+        <h3>Seedling</h3>
+        <p class="for">For a single flower you're not sure about yet.</p>
+        <p class="price">$0</p>
+        <p class="note">Free forever, which for this product means about four blooms.</p>
+        <ul>
+          <li>1 flower</li>
+          <li>20 bookings per bloom</li>
+          <li>Alerts by email, after she closes</li>
+          <li>"Powered by StinkSlot" printed on the rope</li>
+        </ul>
+        <a class="btn" href="../#book">Start free</a>
+      </div>
+
+      <div class="card tier pop">
+        <span class="tag">MOST POPULAR</span>
+        <h3>Pollinator</h3>
+        <p class="for">For conservatories that will get on the local news.</p>
+        <p class="price" data-price="490|59">$490 <small>per bloom</small></p>
+        <p class="note" data-note="Billed when she blooms. Nothing happens in between, and you pay nothing for it.|Billed every year, including the nine where nothing happens.">Billed when she blooms. Nothing happens in between, and you pay nothing for it.</p>
+        <ul>
+          <li>Unlimited bookings</li>
+          <li>3am text alerts</li>
+          <li>Stench surge pricing</li>
+          <li>A waitlist that outlives your visitors</li>
+          <li>Decade view calendar</li>
+          <li>Clothespin fulfillment</li>
+        </ul>
+        <a class="btn btn-primary" href="../#book">Start a trial</a>
+        <p class="fine" style="margin:0">The trial runs until her next bloom.</p>
+      </div>
+
+      <div class="card tier">
+        <h3>Carrion</h3>
+        <p class="for">For institutions with a board, a press office and a smell budget.</p>
+        <p class="price">Custom</p>
+        <p class="note">Priced per nostril.</p>
+        <ul>
+          <li>Everything in Pollinator</li>
+          <li>SSO and SOC 2 Type Stench</li>
+          <li>An on-site sniffer, nose included</li>
+          <li>99.9% bloom SLA (we can't do this, it's in the contract anyway)</li>
+          <li>Choosing a date</li>
+          <li>An account manager who also waits</li>
+        </ul>
+        <button class="btn" type="button" id="sales">Contact sales</button>
+      </div>
+    </div>
+
+    <div class="math">
+      <h2 class="center">The math, over one bloom cycle</h2>
+      <p class="lede center">Barb blooms roughly every ten years. Here's what Pollinator costs across one cycle.</p>
+      <table>
+        <thead><tr><th>Billing</th><th>How it's charged</th><th>Per cycle</th></tr></thead>
+        <tbody>
+          <tr><td>Per bloom</td><td>$490, once</td><td>$490</td></tr>
+          <tr><td>Annual</td><td>$59 a year, for 10 years</td><td>$590</td></tr>
+          <tr><td><b>Annual "savings"</b></td><td></td><td><b>−$100</b></td></tr>
+        </tbody>
+      </table>
+      <p class="fine center">Annual is still our most popular plan. Finance teams like a line item that shows up every year, even when the flower doesn't.</p>
+    </div>
+
+    <div class="faq">
+      <h2 class="center" style="margin-top:56px">Billing questions</h2>
+      <details>
+        <summary>Why is there an annual plan for a flower that blooms once a decade?</summary>
+        <p>Because the monthly plan churned. People would sign up, wait three months, decide nothing was happening and cancel. They were right, but she bloomed the week after.</p>
+      </details>
+      <details>
+        <summary>What happens if she blooms twice in one billing year?</summary>
+        <p>It's never happened. If it does, we will issue a press release before we issue an invoice.</p>
+      </details>
+      <details>
+        <summary>Do you offer refunds?</summary>
+        <p>No. We've issued zero refunds in the life of the company, which is mostly because the life of the company has had one bloom in it.</p>
+      </details>
+      <details>
+        <summary>Do you have a nonprofit discount?</summary>
+        <p>Nearly every customer is a nonprofit, so the discount is the price. Dale isn't a nonprofit. He pays full price and he's happy about it.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <div class="dlg">
+    <h2>Talk to sales</h2>
+    <p>Thanks for reaching out. Someone from our sales team will contact you in 7 to 10 years.</p>
+    <p>They'll call at 3am. It's not personal, that's just when they open.</p>
+    <div class="actions"><button class="btn btn-primary" type="button" id="dlg-ok">That's fair</button></div>
+  </div>
+</dialog>
+
+<footer id="foot"></footer>
+<script src="../assets/site.js"></script>
+<script>
+(() => {
+  const buttons = document.querySelectorAll('[data-bill]');
+  const save = document.getElementById('save');
+  const set = (bill) => {
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.bill === bill)));
+    const i = bill === 'bloom' ? 0 : 1;
+    document.querySelectorAll('[data-price]').forEach((el) => {
+      const p = el.dataset.price.split('|')[i];
+      el.innerHTML = `$${p} <small>${i ? 'per year' : 'per bloom'}</small>`;
+    });
+    document.querySelectorAll('[data-note]').forEach((el) => { el.textContent = el.dataset.note.split('|')[i]; });
+    save.textContent = i ? 'Annual costs $100 more per cycle. You knew that.' : '';
+  };
+  buttons.forEach((b) => b.addEventListener('click', () => set(b.dataset.bill)));
+
+  const dlg = document.getElementById('dlg');
+  document.getElementById('sales').addEventListener('click', () => dlg.showModal());
+  document.getElementById('dlg-ok').addEventListener('click', () => dlg.close());
+})();
+</script>
+</body>
+</html>

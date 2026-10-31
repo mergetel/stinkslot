@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Status · StinkSlot</title>
+<meta name="description" content="StinkSlot system status. All systems dormant. A parody.">
+<meta property="og:title" content="Status · StinkSlot">
+<meta property="og:image" content="https://mergetel.github.io/stinkslot/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .top { padding: 56px 0 8px; }
+  .banner { display: flex; align-items: center; gap: 14px; margin: 24px 0 32px; padding: 20px 22px; border-radius: 16px; color: #fff; background: linear-gradient(135deg, #8d7a84, #6a5560); }
+  .banner b { font-size: 20px; }
+  .banner span { opacity: .85; }
+  .dot { flex: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 5px rgba(255, 255, 255, .25); }
+
+  .comp { padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .comp-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .comp-head b { font-size: 16px; }
+  .comp-head .st { font-weight: 600; font-size: 14px; }
+  .st.ok { color: var(--ok); }
+  .st.dm { color: #7d6872; }
+  .comp p { margin: 2px 0 10px; color: var(--muted); font-size: 14px; }
+  .bars { display: grid; grid-template-columns: repeat(90, 1fr); gap: 2px; height: 30px; }
+  .bars i { border-radius: 2px; background: var(--ok); }
+  .bars.dm i { background: var(--dormant); }
+  .bars i.blip { background: var(--warn); }
+  .bars-foot { display: flex; justify-content: space-between; margin-top: 6px; color: var(--muted); font-size: 12.5px; }
+
+  .incidents { margin-top: 48px; }
+  .inc { padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .inc h3 { margin: 0 0 4px; }
+  .inc time { color: var(--muted); font-size: 14px; }
+  .inc ol { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .inc li b { display: inline-block; min-width: 100px; }
+  .inc li span { color: var(--muted); font-size: 14px; margin-left: 6px; }
+  .sev { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; vertical-align: 3px; }
+  .sev.major { background: #f6dbe3; color: var(--brand); }
+  .sev.minor { background: #f6ecd2; color: #8a6210; }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+
+<main class="wrap" style="max-width:860px">
+  <section class="top">
+    <p class="kicker">Status</p>
+    <h1>All systems <span class="grad">dormant.</span></h1>
+    <div class="banner"><span class="dot" aria-hidden="true"></span><div><b>Barb is dormant.</b><br><span>No stench detected for <span data-dormant>0</span> days. 99.99% downtime, as designed.</span></div></div>
+  </section>
+
+  <section aria-label="Components" id="comps"></section>
+
+  <section class="incidents" aria-labelledby="past">
+    <h2 id="past">Past incidents</h2>
+
+    <article class="inc">
+      <h3>Leaf mistaken for bloom <span class="sev minor">Minor</span></h3>
+      <time datetime="2025-07-01">July 1, 2025</time>
+      <ol>
+        <li><b>Investigating</b> Multiple visitors report that Barb has "gone up." <span>08:12</span></li>
+        <li><b>Identified</b> Barb has put up a 4.6 m leaf. A leaf is not a bloom. <span>08:40</span></li>
+        <li><b>Resolved</b> 312 people tried to book the leaf. All of them have been told. Please stop booking the leaf. <span>17:05</span></li>
+      </ol>
+    </article>
+
+    <article class="inc">
+      <h3>Odor sensor false positive <span class="sev minor">Minor</span></h3>
+      <time datetime="2024-11-19">November 19, 2024</time>
+      <ol>
+        <li><b>Investigating</b> The odor sensor reports a stench index of 3.1. Paging the on-call sniffer. <span>12:31</span></li>
+        <li><b>Identified</b> A volunteer's lunch. <span>12:44</span></li>
+        <li><b>Resolved</b> The lunch was escorted out of the glasshouse. <span>12:46</span></li>
+      </ol>
+    </article>
+
+    <article class="inc">
+      <h3>Major stench <span class="sev major">Major</span></h3>
+      <time datetime="2021-03-02">March 2 to 3, 2021</time>
+      <ol>
+        <li><b>Investigating</b> The spathe is opening. Spadix temperature is 34 °C and rising. <span>02:47</span></li>
+        <li><b>Identified</b> Barb is blooming. Sending alerts to 4,812 bookings at once. <span>02:51</span></li>
+        <li><b>Monitoring</b> The line is out the door and around the parking lot. The booking API is holding. The people near the front are not. <span>06:30</span></li>
+        <li><b>Monitoring</b> A visitor described the smell as "a raccoon that died inside a gym bag." Logged as accurate. <span>11:15</span></li>
+        <li><b>Resolved</b> The spathe closed after 38 hours. Stench downgraded to lingering. See you in 7 to 10 years. <span>16:52</span></li>
+      </ol>
+    </article>
+  </section>
+</main>
+
+<footer id="foot"></footer>
+<script src="../assets/site.js"></script>
+<script>
+(() => {
+  const days = window.BARB.daysDormant().toLocaleString('en-US');
+  const COMPS = [
+    { name: 'Barb', note: `Amorphophallus titanum. Dormant for ${days} days. Currently a leaf.`, st: 'Dormant', dm: true, pct: '0.00% blooming' },
+    { name: 'Booking API', note: 'Taking bookings for a date nobody knows.', st: 'Operational', pct: '100.00% uptime' },
+    { name: 'Bloom detection', note: 'A volunteer checks Barb with a tape measure every morning at 8. Missed one day this month for a wedding.', st: 'Operational', pct: '98.89% uptime', blip: [61] },
+    { name: '3am alerts', note: 'Armed. Last fired March 2, 2021.', st: 'Operational', pct: '100.00% uptime' },
+    { name: 'Smell', note: 'Not detected.', st: 'Dormant', dm: true, pct: '0.00% stench' },
+  ];
+  document.getElementById('comps').innerHTML = COMPS.map((c) => `
+    <div class="comp">
+      <div class="comp-head"><b>${c.name}</b><span class="st ${c.dm ? 'dm' : 'ok'}">${c.st}</span></div>
+      <p>${c.note}</p>
+      <div class="bars ${c.dm ? 'dm' : ''}" aria-hidden="true">${Array.from({ length: 90 }, (_, i) => `<i${c.blip && c.blip.includes(i) ? ' class="blip"' : ''}></i>`).join('')}</div>
+      <div class="bars-foot"><span>90 days ago</span><span>${c.pct}</span><span>Today</span></div>
+    </div>`).join('');
+})();
+</script>
+</body>
+</html>

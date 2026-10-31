@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StinkSlot · Booking software for one flower</title>
+<meta name="description" content="StinkSlot books the 15-minute viewing slots in front of a corpse flower. It blooms every 7 to 10 years, stays open about 36 hours and smells like rotting meat. A parody.">
+<meta property="og:title" content="StinkSlot · Booking software for one flower">
+<meta property="og:description" content="Corpse flowers bloom every 7 to 10 years and smell like rotting meat. StinkSlot sells the 15 minutes in front of one. A parody.">
+<meta property="og:image" content="https://mergetel.github.io/stinkslot/assets/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .hero { padding: 64px 0 40px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Barb, right now */
+  .live { position: relative; padding: 22px; border-radius: 22px; color: #fbeff3; background: radial-gradient(120% 90% at 50% 0%, #a3204f 0%, var(--brand) 45%, var(--brand-2) 100%); box-shadow: 0 30px 60px rgba(75, 15, 61, .28); overflow: hidden; }
+  .live::after { content: ''; position: absolute; right: -40px; top: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(212, 189, 92, .35), transparent 70%); }
+  .live-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .live-top b { font-size: 15px; letter-spacing: .02em; }
+  .pill { display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px; border-radius: 999px; background: rgba(255, 255, 255, .14); font-size: 13px; font-weight: 600; }
+  .pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--dormant); }
+  .count { margin: 4px 0 2px; font: 800 clamp(30px, 4.4vw, 44px)/1.05 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: #fff; }
+  .count-label { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; opacity: .75; }
+  .live dl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0 12px; }
+  .live dl div { padding: 10px 12px; border-radius: 12px; background: rgba(255, 255, 255, .09); }
+  .live dt { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; opacity: .7; }
+  .live dd { margin: 2px 0 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .live dd small { display: block; font-weight: 500; opacity: .7; font-size: 12.5px; }
+  .live .fine { color: rgba(251, 239, 243, .7); margin: 0; }
+
+  /* Logos */
+  .logos { padding: 28px 0 12px; }
+  .logos p { margin: 0 0 18px; color: var(--muted); font-size: 14px; text-align: center; }
+  .logo-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 48px; color: #8a767d; }
+  .logo-row span { white-space: nowrap; }
+  .lg1 { font: 800 15px/1 Georgia, serif; letter-spacing: .14em; text-transform: uppercase; }
+  .lg1 small { display: block; font: 500 11px/1.4 ui-sans-serif, system-ui; letter-spacing: .3em; }
+  .lg2 { font: italic 600 21px/1 Georgia, serif; }
+  .lg3 { font: 700 14px/1.15 ui-sans-serif, system-ui; text-transform: uppercase; letter-spacing: .06em; border: 2px solid currentColor; padding: 6px 9px; border-radius: 4px; }
+  .lg4 { font: 700 20px/1 "Comic Sans MS", "Chalkboard SE", cursive; }
+
+  /* Booking */
+  .book { margin-top: 8px; padding: 8px; border-radius: 26px; background: linear-gradient(135deg, rgba(122, 18, 54, .16), rgba(143, 179, 57, .18)); }
+  .book-inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); background: #fff; border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+  .book-cal { padding: 24px; border-right: 1px solid var(--line); }
+  .book-form { padding: 24px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-content: start; }
+  .book h3 { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .book h3 span { color: var(--muted); font-size: 14px; font-weight: 500; }
+  .decade { display: grid; grid-template-columns: 44px repeat(12, 1fr); gap: 4px; margin: 16px 0 12px; font-size: 12px; }
+  .decade .yr { align-self: center; color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .decade .mh { text-align: center; color: var(--muted); }
+  .decade button { aspect-ratio: 1; min-width: 0; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: var(--soft); cursor: pointer; }
+  .decade button:hover { border-color: var(--brand); }
+  .decade button.past { opacity: .35; }
+  .decade button.win { background: repeating-linear-gradient(135deg, rgba(122, 18, 54, .2) 0 4px, rgba(143, 179, 57, .25) 4px 8px); border-color: rgba(122, 18, 54, .3); }
+  .decade button.now { outline: 2px solid var(--text); outline-offset: 1px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 13px; }
+  .legend i { display: inline-block; width: 12px; height: 12px; margin-right: 6px; border-radius: 3px; vertical-align: -2px; background: var(--soft); border: 1px solid var(--line); }
+  .legend .w i { background: repeating-linear-gradient(135deg, rgba(122, 18, 54, .3) 0 3px, rgba(143, 179, 57, .35) 3px 6px); }
+  .legend .n i { outline: 2px solid var(--text); outline-offset: 1px; }
+  .datebox { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 12px; }
+  .datebox b { font-size: 15px; }
+
+  .field { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .field > label, .field > span { font-weight: 600; font-size: 14px; }
+  .field input[type=text], .field select { width: 100%; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font: inherit; font-size: 15px; background: #fff; }
+  .field input[type=range] { width: 100%; accent-color: var(--brand); }
+  .tol { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; }
+  .tol b { color: var(--brand); }
+  .radios { display: grid; gap: 6px; font-size: 15px; }
+  .radios label, .check { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .radios input, .check input { accent-color: var(--brand); }
+
+  .ticket { display: none; grid-column: 1 / -1; padding: 28px 24px; border-top: 1px solid var(--line); background: linear-gradient(180deg, #fff6f1, #fff); }
+  .ticket.on { display: block; animation: rise .5s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .ticket .label { margin: 0 0 6px; color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  .ticket h3 { font-size: clamp(24px, 3.6vw, 34px); letter-spacing: -.02em; display: block; }
+  .stub { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0 14px; }
+  .stub div { padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+  .stub dt { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .stub dd { margin: 2px 0 0; font-weight: 700; }
+  .ticket .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+
+  /* Steps, features */
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .step .n { display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 14px; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); font-weight: 800; color: var(--brand); }
+  .feat .ico { font-size: 22px; margin-bottom: 10px; }
+  .feat p, .step p { margin: 0; color: var(--muted); }
+
+  /* Forecast */
+  .forecast { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 28px; }
+  .day { padding: 16px 10px; border: 1px solid var(--line); border-radius: 14px; background: #fff; text-align: center; }
+  .day b { display: block; font-size: 14px; color: var(--muted); }
+  .day .pct { display: block; margin: 8px 0 4px; font-size: 28px; font-weight: 800; letter-spacing: -.02em; }
+  .day small { color: var(--muted); font-size: 12.5px; line-height: 1.3; display: block; }
+
+  /* API */
+  .api { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: center; }
+  pre.code { margin: 0; padding: 20px; border-radius: 16px; background: #1c0d16; color: #f1e6ea; font: 13.5px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-x: auto; white-space: pre; }
+  pre.code .c { color: #957f88; }
+  pre.code .s { color: #c8df8a; }
+  pre.code .k { color: #f0a8c3; }
+
+  /* Stats */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; text-align: center; }
+  .stats b { display: block; font-size: clamp(30px, 5vw, 48px); letter-spacing: -.03em; line-height: 1.1; }
+  .stats span { color: var(--muted); font-size: 15px; }
+
+  /* Testimonials */
+  .quote { display: flex; flex-direction: column; gap: 16px; }
+  .quote blockquote { margin: 0; font-size: 18px; line-height: 1.45; font-weight: 500; }
+  .who { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+  .av { display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 50%; color: #fff; font-weight: 800; font-size: 15px; }
+  .who b { display: block; font-size: 15px; }
+  .who span { color: var(--muted); font-size: 14px; }
+  .stars { color: var(--warn); letter-spacing: 2px; }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 28px auto 0; }
+  .faq details { border-bottom: 1px solid var(--line); padding: 16px 4px; }
+  .faq summary { cursor: pointer; font-weight: 700; font-size: 17px; }
+  .faq details p { margin: 10px 0 0; color: var(--muted); }
+
+  .cta { padding: 56px 24px; border-radius: 24px; text-align: center; color: #fff; background: linear-gradient(135deg, var(--brand), var(--brand-2)); }
+  .cta h2 { color: #fff; }
+  .cta p { margin: 0 auto 24px; max-width: 540px; opacity: .9; }
+  .cta .btn { background: #fff; color: var(--brand); border: 0; }
+
+  @media (max-width: 960px) {
+    .hero-grid, .book-inner, .api { grid-template-columns: minmax(0, 1fr); }
+    .book-cal { border-right: 0; border-bottom: 1px solid var(--line); }
+    .g4 { grid-template-columns: repeat(2, 1fr); }
+    .forecast { grid-template-columns: repeat(4, 1fr); }
+    .stub { grid-template-columns: repeat(2, 1fr); }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .hero { padding-top: 40px; }
+    .g4 { grid-template-columns: 1fr; }
+    .forecast { grid-template-columns: repeat(2, 1fr); }
+    .decade { grid-template-columns: 34px repeat(12, 1fr); gap: 2px; font-size: 10px; }
+    .decade button { border-radius: 3px; }
+  }
+</style>
+</head>
+<body>
+<header id="nav"></header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <a class="eyebrow" href="status/"><b>NEW</b> <span>3am bloom alerts, now by text</span> →</a>
+        <h1>Booking software for <span class="grad">one flower.</span></h1>
+        <p class="lede">Corpse flowers bloom every 7 to 10 years, stay open for about 36 hours, and smell like rotting meat on purpose. StinkSlot sells the 15 minutes in front of one. Specifically, in front of Barb.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="#book">Book a viewing</a>
+          <a class="btn" href="pricing/">See pricing</a>
+        </div>
+      </div>
+
+      <aside class="live" aria-labelledby="live-h">
+        <div class="live-top">
+          <b id="live-h">Barb, right now</b>
+          <span class="pill"><i></i> Dormant</span>
+        </div>
+        <p class="count-label">Next bloom in</p>
+        <p class="count" id="countdown" aria-live="off">????d ??h ??m</p>
+        <p class="fine">Our bloom model's best estimate. It is also our bloom model's only estimate.</p>
+        <dl>
+          <div><dt>Days dormant</dt><dd data-dormant>0</dd></div>
+          <div><dt>Stench index</dt><dd><span id="stench">0.2</span> / 10<small>faint compost</small></dd></div>
+          <div><dt>Spadix temp</dt><dd><span id="temp">23.8</span> °C<small>36 °C when she blooms</small></dd></div>
+          <div><dt>Current form</dt><dd>One leaf, <span id="leaf">4.1</span> m<small>The leaf is not bookable</small></dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="logos" aria-label="Customers">
+    <div class="wrap">
+      <p>Trusted by three conservatories and a guy named Dale</p>
+      <div class="logo-row">
+        <span class="lg1">Plumb Valley<small>Conservatory</small></span>
+        <span class="lg2">Ostrander Glasshouse</span>
+        <span class="lg3">Lower Hatchett<br>Botanical Society</span>
+        <span class="lg4">Dale's Greenhouse</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="book">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Book a viewing</p>
+        <h2>Fifteen minutes. Two meters from the spadix.</h2>
+        <p class="lede">Pick everything except the date. Barb picks the date.</p>
+      </div>
+
+      <div class="book">
+        <form class="book-inner" id="form" autocomplete="off">
+          <div class="book-cal">
+            <h3>Choose a date <span>Barb, Amorphophallus titanum</span></h3>
+            <div class="decade" id="decade" role="group" aria-label="Seven years of months"></div>
+            <ul class="legend">
+              <li class="w"><i></i>Bloom window (estimated)</li>
+              <li><i></i>Not happening</li>
+              <li class="n"><i></i>You are here</li>
+            </ul>
+            <div class="datebox">
+              <span class="muted">Your date</span>
+              <b>Whenever she's ready</b>
+            </div>
+          </div>
+
+          <div class="book-form">
+            <div class="field">
+              <label for="name">Name on the booking</label>
+              <input type="text" id="name" maxlength="40" placeholder="Optional" spellcheck="false">
+            </div>
+            <div class="field">
+              <label for="party">Party size</label>
+              <select id="party">
+                <option value="1">Just me (recommended, nobody will come)</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="30">A school group (please don't)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="tol">Stench tolerance</label>
+              <input type="range" id="tol" min="1" max="5" step="1" value="3">
+              <div class="tol"><b id="tol-name">Gym bag in August</b><span class="muted" id="tol-dist">5 m from the spadix</span></div>
+            </div>
+            <div class="field">
+              <span>Tell me she's open by</span>
+              <div class="radios">
+                <label><input type="radio" name="notify" value="Text at 3am" checked> Text at 3am</label>
+                <label><input type="radio" name="notify" value="Email, after she closes"> Email (arrives after she closes)</label>
+                <label><input type="radio" name="notify" value="A neighbor knocks"> Have a neighbor knock</label>
+              </div>
+            </div>
+            <label class="check"><input type="checkbox" id="pin" checked> Add a StinkSlot clothespin ($4)</label>
+            <button class="btn btn-primary" id="go" type="submit">Reserve my 15 minutes</button>
+          </div>
+
+          <div class="ticket" id="ticket" aria-live="polite">
+            <p class="label">Booking <span id="t-id">SS-000000</span></p>
+            <h3 id="t-head">You're booked. Probably.</h3>
+            <dl class="stub">
+              <div><dt>When</dt><dd>Mar 2028 to Mar 2031</dd></div>
+              <div><dt>Time</dt><dd>15 min, likely 1am to 5am</dd></div>
+              <div><dt>Place in line</dt><dd id="t-pos">#4,812</dd></div>
+              <div><dt>Distance</dt><dd id="t-dist">5 m</dd></div>
+              <div><dt>Alert</dt><dd id="t-alert">Text at 3am</dd></div>
+              <div><dt>Party</dt><dd id="t-party">1</dd></div>
+              <div><dt>Refundable</dt><dd>No</dd></div>
+              <div><dt>Transferable</dt><dd>In your will</dd></div>
+            </dl>
+            <div class="actions">
+              <button class="btn btn-primary" id="ics" type="button">Add to calendar</button>
+              <button class="btn" id="copy" type="button">Copy booking</button>
+              <button class="btn" id="again" type="button">Book another</button>
+            </div>
+            <p class="fine" id="t-note">The calendar event is all day for three years. Your phone will be fine.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="block soft">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">How it works</p>
+        <h2>Set it up in an afternoon. Use it in 2029.</h2>
+      </div>
+      <div class="grid g4" style="margin-top:32px">
+        <div class="card step"><div class="n">1</div><h3>Connect your flower</h3><p>Install a StinkSync sensor. It's a tape measure and a volunteer who checks it every morning.</p></div>
+        <div class="card step"><div class="n">2</div><h3>Wait 7 to 10 years</h3><p>StinkSlot handles the waiting. Honestly, the waiting is most of the product.</p></div>
+        <div class="card step"><div class="n">3</div><h3>Get paged at 3am</h3><p>When the spathe opens, every booking gets a text at once, ranked by stench tolerance.</p></div>
+        <div class="card step"><div class="n">4</div><h3>Run the line</h3><p>Two thousand people show up with their phones out. Each one gets 15 minutes and a clothespin.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Features</p>
+        <h2>Everything one flower needs</h2>
+        <p class="lede">Built from the ground up for a single plant that blooms for 36 hours a decade. We turned down every other use case on purpose.</p>
+      </div>
+      <div class="grid g3">
+        <div class="card feat"><div class="ico" aria-hidden="true">👃</div><h3>Stench-aware queue</h3><p>High stench tolerance puts you closer and moves you faster. The front of the line is empty for a reason.</p></div>
+        <div class="card feat"><div class="ico" aria-hidden="true">📈</div><h3>Surge pricing</h3><p>Slot prices track the odor index in real time. Peak stench is peak revenue.</p></div>
+        <div class="card feat"><div class="ico" aria-hidden="true">📟</div><h3>One alert per decade</h3><p>Text, push and pager. It fires about once every eight years, at 3am, and it has to work the first time.</p></div>
+        <div class="card feat"><div class="ico" aria-hidden="true">🪦</div><h3>A waitlist that outlives you</h3><p>Unused bookings roll to the next bloom and pass on in your will. The terms include a clause for it.</p></div>
+        <div class="card feat"><div class="ico" aria-hidden="true">🪲</div><h3>Pollinator pricing</h3><p>Carrion beetles and flesh flies book free. They're the only visitors doing actual work.</p></div>
+        <div class="card feat"><div class="ico" aria-hidden="true">🗓️</div><h3>Decade view</h3><p>A calendar that shows ten years at once, so you can see exactly how much isn't happening.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block soft">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Stench forecast</p>
+        <h2>This week at the conservatory</h2>
+        <p class="lede">Updated hourly. It has said zero for <span data-dormant>0</span> days in a row.</p>
+      </div>
+      <div class="forecast" id="forecast"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap api">
+      <div>
+        <p class="kicker">API</p>
+        <h2>One webhook. It matters a lot.</h2>
+        <p class="lede">Subscribe to <code>flower.bloomed</code> and do whatever you want with it. It fires about once a decade, so there is no test mode. You test it in production, in your pajamas.</p>
+      </div>
+      <pre class="code" aria-label="Code sample"><span class="k">import</span> { StinkSlot } <span class="k">from</span> <span class="s">'@stinkslot/sdk'</span>;
+
+<span class="k">const</span> ss = <span class="k">new</span> StinkSlot({ flower: <span class="s">'barb'</span> });
+
+<span class="k">const</span> next = <span class="k">await</span> ss.blooms.next();
+<span class="c">// { eta: null, window: ['2028-03', '2031-03'],</span>
+<span class="c">//   confidence: 'vibes' }</span>
+
+ss.on(<span class="s">'flower.bloomed'</span>, <span class="k">async</span> () =&gt; {
+  <span class="k">await</span> ss.notify.everyone({ at: <span class="s">'03:00'</span>, mercy: <span class="k">false</span> });
+});
+<span class="c">// Last fired 2021-03-02 at 02:47.</span></pre>
+    </div>
+  </section>
+
+  <section class="block soft">
+    <div class="wrap stats">
+      <div><b>1</b><span>flower under management</span></div>
+      <div><b>100%</b><span>of the total addressable market</span></div>
+      <div><b>36 hrs</b><span>of bookable inventory per decade</span></div>
+      <div><b>0</b><span>refunds issued, ever</span></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">Customers</p>
+        <h2>People who were there</h2>
+      </div>
+      <div class="grid g3" style="margin-top:28px">
+        <figure class="card quote" style="margin:0">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote>"We sold all 144 slots in eleven minutes. Then she bloomed four days early and StinkSlot texted 144 people at 2:51am. Every one of them came. That's the product."</blockquote>
+          <figcaption class="who"><span class="av" style="background:#7a1236">MO</span><span><b>Marguerite Olsen</b><span>Visitor experience, Plumb Valley Conservatory</span></span></figcaption>
+        </figure>
+        <figure class="card quote" style="margin:0">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote>"I've been on the waitlist since 2021. Support says I'm close. They've said that for five years and I still believe them."</blockquote>
+          <figcaption class="who"><span class="av" style="background:#8fb339">TV</span><span><b>Theo Varga</b><span>Waitlist #4,388</span></span></figcaption>
+        </figure>
+        <figure class="card quote" style="margin:0">
+          <div class="stars" aria-label="5 stars">★★★★★</div>
+          <blockquote>"Set it up in an afternoon and didn't log in again for six years. Best software I've ever paid for."</blockquote>
+          <figcaption class="who"><span class="av" style="background:#4b0f3d">D</span><span><b>Dale</b><span>Has a greenhouse</span></span></figcaption>
+        </figure>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>What if she doesn't bloom?</summary>
+          <p>Your booking rolls over to the next bloom. If that's after you die, it goes to whoever you named in your will. The booking form has a clause for this, which you agreed to.</p>
+        </details>
+        <details>
+          <summary>Do you support other plants?</summary>
+          <p>No. Booking software for everyone is the most crowded market in software. Booking software for one specific flower in one specific glasshouse has no competitors at all. We checked. The 17-year cicada came up, and we decided it's a different vertical.</p>
+        </details>
+        <details>
+          <summary>Why does she smell like that?</summary>
+          <p>When Barb blooms she heats her spadix to about body temperature and pushes out dimethyl trisulfide, which smells like rotting meat, and isovaleric acid, which smells like feet. It brings in carrion beetles. It's working as designed.</p>
+        </details>
+        <details>
+          <summary>Can I pick my time slot?</summary>
+          <p>No. Barb opens when she opens, usually at night. You get 15 minutes, and the time is in the text.</p>
+        </details>
+        <details>
+          <summary>Is there a mobile app?</summary>
+          <p>There's a push notification. It fires once a decade at 3am. That's the app.</p>
+        </details>
+        <details>
+          <summary>What data do you keep?</summary>
+          <p>Your name, your phone number and your stench tolerance. The tolerance is the sensitive one. Nothing on this page is actually sent anywhere, because StinkSlot isn't real.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:40px">
+    <div class="cta">
+      <h2>Don't be the one who hears about it on Monday</h2>
+      <p>Book now and you'll find out at 3am like everyone else. Any earlier and we'd need a different flower.</p>
+      <a class="btn" href="#book">Book a viewing</a>
+    </div>
+  </section>
+</main>
+
+<footer id="foot"></footer>
+<script src="assets/site.js"></script>
+<script>
+(() => {
+  const B = window.BARB;
+  const $ = (id) => document.getElementById(id);
+  const now = new Date();
+
+  // A small seeded random, so the live numbers hold still for a day.
+  let seed = Math.floor(now.getTime() / 86400000);
+  const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+
+  $('stench').textContent = (0.1 + rand() * 0.3).toFixed(1);
+  $('temp').textContent = (22.6 + rand() * 2.2).toFixed(1);
+  $('leaf').textContent = (3.8 + rand() * 0.8).toFixed(1);
+
+  // The countdown never settles on a number.
+  const pad = (n, w) => String(n).padStart(w, '0');
+  const r = (max) => Math.floor(Math.random() * max);
+  const tick = () => { $('countdown').textContent = `${pad(r(3650), 4)}d ${pad(r(24), 2)}h ${pad(r(60), 2)}m`; };
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(tick, 90);
+  else $('countdown').textContent = 'Unknown';
+
+  // Seven years of months. Every one of them is a button, none of them work.
+  const MONTHS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
+  const NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const firstYear = now.getFullYear();
+  const dec = $('decade');
+  dec.insertAdjacentHTML('beforeend', '<span></span>' + MONTHS.map((m) => `<span class="mh" aria-hidden="true">${m}</span>`).join(''));
+  for (let y = firstYear; y < firstYear + 7; y++) {
+    dec.insertAdjacentHTML('beforeend', `<span class="yr">${y}</span>`);
+    for (let m = 0; m < 12; m++) {
+      const d = new Date(y, m, 15);
+      const cls = [];
+      if (d >= B.windowStart && d < B.windowEnd) cls.push('win');
+      if (y === now.getFullYear() && m === now.getMonth()) cls.push('now');
+      else if (d < now) cls.push('past');
+      const what = cls.includes('win') ? 'in the bloom window' : 'not happening';
+      dec.insertAdjacentHTML('beforeend', `<button type="button" class="${cls.join(' ')}" aria-label="${NAMES[m]} ${y}, ${what}"></button>`);
+    }
+  }
+  const NOPE = [
+    'Barb picks the date. You get a text.',
+    "That month is open. Barb just isn't.",
+    "Choosing a date is an Enterprise feature. Barb isn't on Enterprise.",
+    "We'll pass it on to Barb. She doesn't read.",
+    'You can look at the calendar. Looking is free.',
+  ];
+  let nope = 0;
+  dec.addEventListener('click', (e) => {
+    if (e.target.tagName !== 'BUTTON') return;
+    window.toast(NOPE[nope++ % NOPE.length]);
+  });
+
+  // Stench tolerance.
+  const TOL = [
+    ['Scented candle', 15],
+    ["Teenager's bedroom", 9],
+    ['Gym bag in August', 5],
+    ['Dumpster behind a fish market', 2],
+    ["I've worked in a morgue", 0.5],
+  ];
+  const tol = $('tol');
+  const showTol = () => {
+    const [name, m] = TOL[tol.value - 1];
+    $('tol-name').textContent = name;
+    $('tol-dist').textContent = `${m} m from the spadix`;
+  };
+  tol.addEventListener('input', showTol);
+  showTol();
+
+  // Stench forecast, a week from today.
+  const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const NOTES = ['Dormant', 'Still a leaf', 'Dormant', 'Leaf grew 2 cm', 'Dormant', 'Dormant', 'Still a leaf'];
+  const tuna = 2 + Math.floor(rand() * 5);
+  $('forecast').innerHTML = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(now.getTime() + i * 86400000);
+    const note = i === tuna ? 'Volunteer ate tuna nearby' : NOTES[(d.getDate() + i) % NOTES.length];
+    const pct = i === tuna ? 2 : 0;
+    return `<div class="day"><b>${i === 0 ? 'Today' : DAYS[d.getDay()]}</b><span class="pct">${pct}%</span><small>${note}</small></div>`;
+  }).join('');
+
+  // The booking.
+  let booking = null;
+  const form = $('form');
+  const go = $('go');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    go.disabled = true;
+    go.textContent = 'Checking with Barb…';
+    setTimeout(() => { go.textContent = "Barb didn't answer. Booking anyway…"; }, 1100);
+    setTimeout(() => {
+      const t = Number(tol.value);
+      const name = $('name').value.trim();
+      const party = $('party');
+      const id = 'SS-' + String(Math.floor(100000 + Math.random() * 900000));
+      let pos = 4200 + Math.floor(Math.random() * 1400);
+      if (t === 5) pos -= 1200;
+      const alert = form.querySelector('input[name=notify]:checked').value;
+      booking = { id, name, pos, dist: TOL[t - 1][1], alert, party: party.options[party.selectedIndex].text };
+
+      $('t-id').textContent = id;
+      $('t-head').textContent = name ? `${name}, you're booked. Probably.` : "You're booked. Probably.";
+      $('t-pos').textContent = '#' + pos.toLocaleString('en-US');
+      $('t-dist').textContent = `${booking.dist} m`;
+      $('t-alert').textContent = alert;
+      $('t-party').textContent = party.value === '30' ? 'A school group' : party.value;
+      const notes = ['The calendar event is all day for three years. Your phone will be fine.'];
+      if (t === 5) notes.push('Morgue tier skips 1,200 people, because nobody else wants to stand that close.');
+      if (party.value === '30') notes.push("We've told the conservatory. They said \"oh no.\"");
+      if ($('pin').checked) notes.push('Your clothespin ships when she blooms.');
+      $('t-note').textContent = notes.join(' ');
+
+      $('ticket').classList.add('on');
+      $('ticket').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      go.disabled = false;
+      go.textContent = 'Reserve my 15 minutes';
+    }, 2300);
+  });
+
+  const ymd = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1, 2)}${pad(d.getDate(), 2)}`;
+  $('ics').addEventListener('click', () => {
+    if (!booking) return;
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+    const ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//StinkSlot//Parody//EN',
+      'BEGIN:VEVENT',
+      `UID:${booking.id}@stinkslot`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART;VALUE=DATE:${ymd(B.windowStart)}`,
+      `DTEND;VALUE=DATE:${ymd(B.windowEnd)}`,
+      'SUMMARY:Corpse flower might bloom (StinkSlot)',
+      `DESCRIPTION:Booking ${booking.id}. Your 15 minutes is somewhere in here. Bring a clothespin. StinkSlot is a parody.`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+    a.download = `stinkslot-${booking.id}.ics`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  $('copy').addEventListener('click', async () => {
+    if (!booking) return;
+    const text = `I booked 15 minutes in front of a corpse flower. Date: whenever she's ready (2028 to 2031). Place in line: #${booking.pos.toLocaleString('en-US')}. Booking ${booking.id}. https://${window.SITE}/ (a parody)`;
+    try { await navigator.clipboard.writeText(text); window.toast('Copied. Brag responsibly.'); }
+    catch { window.toast("Your browser won't let this page copy. Select the booking and copy it by hand."); }
+  });
+
+  $('again').addEventListener('click', () => {
+    $('ticket').classList.remove('on');
+    form.reset();
+    showTol();
+    $('book').scrollIntoView({ behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
