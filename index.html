@@ -14,8 +14,15 @@
 <link rel="stylesheet" href="assets/site.css">
 <style>
   .hero { padding: 64px 0 40px; }
-  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
   .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Hero photo */
+  .hero-art { position: relative; }
+  .hero-photo { position: relative; margin: 0; }
+  .hero-photo img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; object-position: 50% 50%; border-radius: 24px; box-shadow: 0 30px 60px rgba(75, 15, 61, .22); }
+  .not-barb { position: absolute; top: 14px; right: 14px; padding: 5px 11px; border-radius: 999px; background: rgba(255, 250, 246, .92); color: var(--text); font-size: 13px; font-weight: 600; }
+  .hero .live { margin-top: 36px; max-width: 560px; }
 
   /* Barb, right now */
   .live { position: relative; padding: 22px; border-radius: 22px; color: #fbeff3; background: radial-gradient(120% 90% at 50% 0%, #a3204f 0%, var(--brand) 45%, var(--brand-2) 100%); box-shadow: 0 30px 60px rgba(75, 15, 61, .28); overflow: hidden; }
@@ -32,6 +39,11 @@
   .live dd { margin: 2px 0 0; font-weight: 700; font-variant-numeric: tabular-nums; }
   .live dd small { display: block; font-weight: 500; opacity: .7; font-size: 12.5px; }
   .live .fine { color: rgba(251, 239, 243, .7); margin: 0; }
+
+  /* The view */
+  .view { margin: 0 0 28px; position: relative; }
+  .view img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 8; object-fit: cover; border-radius: 22px; }
+  .view figcaption { position: absolute; left: 16px; bottom: 14px; padding: 6px 12px; border-radius: 10px; background: rgba(34, 16, 26, .72); color: #fff; font-size: 14px; }
 
   /* Logos */
   .logos { padding: 28px 0 12px; }
@@ -89,6 +101,8 @@
 
   /* Steps, features */
   .g4 { grid-template-columns: repeat(4, 1fr); }
+  .step { overflow: hidden; }
+  .step img { display: block; height: auto; max-width: none; width: calc(100% + 48px); margin: -24px -24px 18px; aspect-ratio: 4 / 3; object-fit: cover; }
   .step .n { display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 14px; border-radius: 10px; background: var(--soft); border: 1px solid var(--line); font-weight: 800; color: var(--brand); }
   .feat .ico { font-size: 22px; margin-bottom: 10px; }
   .feat p, .step p { margin: 0; color: var(--muted); }
@@ -134,6 +148,9 @@
 
   @media (max-width: 960px) {
     .hero-grid, .book-inner, .api { grid-template-columns: minmax(0, 1fr); }
+    .hero-art { max-width: 520px; margin: 0 auto; width: 100%; }
+    .hero-photo img { aspect-ratio: 4 / 5; object-position: 50% 85%; }
+    .view img { aspect-ratio: 16 / 9; }
     .book-cal { border-right: 0; border-bottom: 1px solid var(--line); }
     .g4 { grid-template-columns: repeat(2, 1fr); }
     .forecast { grid-template-columns: repeat(4, 1fr); }
@@ -163,8 +180,6 @@
           <a class="btn btn-primary" href="#book">Book a viewing</a>
           <a class="btn" href="pricing/">See pricing</a>
         </div>
-      </div>
-
       <aside class="live" aria-labelledby="live-h">
         <div class="live-top">
           <b id="live-h">Barb, right now</b>
@@ -180,6 +195,14 @@
           <div><dt>Current form</dt><dd>One leaf, <span id="leaf">4.1</span> m<small>The leaf is not bookable</small></dd></div>
         </dl>
       </aside>
+      </div>
+
+      <div class="hero-art">
+      <figure class="hero-photo">
+        <img src="assets/photos/bloom.jpg" width="900" height="1349" alt="A corpse flower in full bloom: a tall pale yellow spadix rising out of a frilled spathe, green outside and deep pink inside, in a glasshouse">
+        <span class="not-barb">Not actually Barb</span>
+      </figure>
+      </div>
     </div>
   </section>
 
@@ -202,6 +225,11 @@
         <h2>Fifteen minutes. Two meters from the spadix.</h2>
         <p class="lede">Pick everything except the date. Barb picks the date.</p>
       </div>
+
+      <figure class="view">
+        <img src="assets/photos/spadix.jpg" width="1280" height="615" loading="lazy" alt="Looking down into an open corpse flower: a thick yellow spadix in the middle of a ribbed, deep pink spathe">
+        <figcaption>The view from 0.5 m. Morgue tier only.</figcaption>
+      </figure>
 
       <div class="book">
         <form class="book-inner" id="form" autocomplete="off">
@@ -283,10 +311,10 @@
         <h2>Set it up in an afternoon. Use it in 2029.</h2>
       </div>
       <div class="grid g4" style="margin-top:32px">
-        <div class="card step"><div class="n">1</div><h3>Connect your flower</h3><p>Install a StinkSync sensor. It's a tape measure and a volunteer who checks it every morning.</p></div>
-        <div class="card step"><div class="n">2</div><h3>Wait 7 to 10 years</h3><p>StinkSlot handles the waiting. Honestly, the waiting is most of the product.</p></div>
-        <div class="card step"><div class="n">3</div><h3>Get paged at 3am</h3><p>When the spathe opens, every booking gets a text at once, ranked by stench tolerance.</p></div>
-        <div class="card step"><div class="n">4</div><h3>Run the line</h3><p>Two thousand people show up with their phones out. Each one gets 15 minutes and a clothespin.</p></div>
+        <div class="card step"><img src="assets/photos/measure.jpg" width="640" height="853" loading="lazy" style="object-position:50% 45%" alt="An open corpse flower in a pot, with a measuring stick standing next to it"><div class="n">1</div><h3>Connect your flower</h3><p>Install a StinkSync sensor. It's a tape measure and a volunteer who checks it every morning.</p></div>
+        <div class="card step"><img src="assets/photos/leaf.jpg" width="640" height="853" loading="lazy" style="object-position:50% 30%" alt="A corpse flower in its leaf stage: one tall stalk with a spreading canopy of leaflets, like a small tree"><div class="n">2</div><h3>Wait 7 to 10 years</h3><p>StinkSlot handles the waiting. Honestly, the waiting is most of the product.</p></div>
+        <div class="card step"><img src="assets/photos/thermal.jpg" width="640" height="426" loading="lazy" alt="A hand holding a thermal camera pointed at a blooming corpse flower, the screen reading 40.7 degrees Celsius"><div class="n">3</div><h3>Get paged at 3am</h3><p>When the spadix heats up past 36 °C, every booking gets a text at once, ranked by stench tolerance.</p></div>
+        <div class="card step"><img src="assets/photos/frill.jpg" width="640" height="424" loading="lazy" alt="Close-up of the base of a corpse flower spadix inside the purple, frilled spathe"><div class="n">4</div><h3>Run the line</h3><p>Two thousand people show up with their phones out. Each one gets 15 minutes and a clothespin.</p></div>
       </div>
     </div>
   </section>

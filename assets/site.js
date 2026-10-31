@@ -52,6 +52,7 @@ window.SITE = 'mergetel.github.io/stinkslot';
         </section>
         <div class="footbar">
           <p>StinkSlot is a parody. Barb, the conservatories, the people and the quotes are made up. Corpse flowers are real, and they really do smell like that.</p>
+          <p class="credits">The photos are real corpse flowers, none of them Barb, all CC0 from Wikimedia Commons: Kew by <a href="https://commons.wikimedia.org/wiki/File:Titan_arum_flowering,_Princess_of_Wales_Conservatory,_Kew.jpg">AndyScott</a> and <a href="https://commons.wikimedia.org/wiki/File:Titan_arum_at_Kew_Gardens_in_leaf_cycle.jpg">Mooyah</a>, Meise by <a href="https://commons.wikimedia.org/wiki/File:Amorphophallus_titanum_at_Meise_Botanic_Garden_in_2024.jpg">Orbicule</a>, Warsaw by <a href="https://commons.wikimedia.org/wiki/File:Measuring_temperature_of_a_blooming_Amorphophallus_titanum_3.jpg">Olaf</a>, Bayreuth by <a href="https://commons.wikimedia.org/wiki/File:Titan_Arum_at_Bayreuth_University_-_Second_Day_1.JPG">Fbianh</a>.</p>
           <p><a href="${BASE}pricing/">Pricing</a> · <a href="${BASE}status/">Status</a> · <a href="https://merge.tel">merge.tel</a></p>
         </div>
       </div>`;

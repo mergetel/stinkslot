@@ -75,6 +75,7 @@ section.block.soft { background: var(--soft); border-top: 1px solid var(--line);
 .john p { margin: 0 0 12px; }
 .footbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding: 20px 0 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
 .footbar p { margin: 0; }
+.footbar .credits { flex-basis: 100%; order: 3; font-size: 13px; }
 
 /* Modal */
 dialog { width: min(480px, calc(100vw - 32px)); padding: 0; border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 30px 80px rgba(60, 10, 30, .3); }

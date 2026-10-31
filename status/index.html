@@ -37,6 +37,11 @@
   .inc ol { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
   .inc li b { display: inline-block; min-width: 100px; }
   .inc li span { color: var(--muted); font-size: 14px; margin-left: 6px; }
+  .inc-fig { float: right; width: 190px; margin: 0 0 12px 20px; }
+  .inc-fig img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; }
+  .inc-fig figcaption { margin-top: 4px; color: var(--muted); font-size: 13px; text-align: center; }
+  .inc { overflow: hidden; }
+  @media (max-width: 560px) { .inc-fig { float: none; width: 100%; margin: 12px 0; } .inc-fig img { aspect-ratio: 4 / 3; } }
   .sev { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; vertical-align: 3px; }
   .sev.major { background: #f6dbe3; color: var(--brand); }
   .sev.minor { background: #f6ecd2; color: #8a6210; }
@@ -58,6 +63,10 @@
     <h2 id="past">Past incidents</h2>
 
     <article class="inc">
+      <figure class="inc-fig">
+        <img src="../assets/photos/leaf.jpg" width="640" height="853" loading="lazy" alt="A corpse flower in its leaf stage: one tall stalk with a canopy of leaflets">
+        <figcaption>Not a bloom. Please stop booking it.</figcaption>
+      </figure>
       <h3>Leaf mistaken for bloom <span class="sev minor">Minor</span></h3>
       <time datetime="2025-07-01">July 1, 2025</time>
       <ol>
